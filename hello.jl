@@ -1,5 +1,5 @@
 ### A Pluto.jl notebook ###
-# v0.19.36
+# v0.19.40
 
 using Markdown
 using InteractiveUtils
@@ -31,7 +31,7 @@ md"""
 """
 
 # ╔═╡ ee932197-1a89-4ada-b5eb-6e0514c2f47c
-hello("YourName") # ここを変更して遊んでみよう
+hello("Benjamin") # ここを変更して遊んでみよう
 
 # ╔═╡ 4c482f7b-0f75-4b77-ad79-62ce700d5834
 md"""
@@ -60,11 +60,11 @@ Example.hello("Name")
 # ╔═╡ b5c5f82b-5cd6-4b71-8b9f-d4b9715d21b7
 begin
 	x = 2
-	y = 3
+	y = 5
 end
 
 # ╔═╡ a0f3c104-da2d-4540-ae62-84a9f2dee111
-z = 5 # 上のセルで定義された x, y の変数を変更すると z も更新されることに注意
+z = x + y # 上のセルで定義された x, y の変数を変更すると z も更新されることに注意
 
 # ╔═╡ ff5b2387-b22b-423d-8b4c-e99a085f5293
 """
@@ -111,6 +111,33 @@ md"""
 - このとき，上記のテストが正常に動かなくなることを確認せよ
 - Point2D の実装を元に3次元版を実装してみよ
 """
+
+# ╔═╡ 83b66270-6adf-4d9c-beb8-4df9da47465a
+struct Point3D
+	x::Float64
+	y::Float64
+	z::Float64
+end
+
+# ╔═╡ d4c967e3-e243-4f4a-94ed-c8c75e759c92
+distance3(p::Point3D, q::Point3D) = √((p.x - q.x) ^ 2 + (p.y - q.y) ^ 2 + (p.z - q.z) ^ 2)
+
+# ╔═╡ d8f49ba3-554c-4409-a813-5b04a2a5ee5b
+
+
+@testset "Point3D" begin
+	o3 = Point3D(0, 0, 0)
+	@test o3.x == 0.
+	@test o3.y == 0.
+	@test o3.z == 0.
+	p3 = Point3D(2, 2, 2)
+	@test p3.x == 2
+	@test p3.y == 2
+	@test p3.y == 2
+	d31 = distance3(p3, o3)
+	d32 = distance3(o3, p3)
+	@test d31 == d32 ≈ √12
+end
 
 # ╔═╡ 00000000-0000-0000-0000-000000000001
 PLUTO_PROJECT_TOML_CONTENTS = """
@@ -182,5 +209,8 @@ uuid = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
 # ╟─e2b487c7-7d56-4cb1-b50d-a7d58d5e5d5c
 # ╠═e8a37180-4777-4087-9155-4a3c37530d54
 # ╟─e10f9104-9905-484a-9144-18d9467ec743
+# ╠═83b66270-6adf-4d9c-beb8-4df9da47465a
+# ╠═d4c967e3-e243-4f4a-94ed-c8c75e759c92
+# ╠═d8f49ba3-554c-4409-a813-5b04a2a5ee5b
 # ╟─00000000-0000-0000-0000-000000000001
 # ╟─00000000-0000-0000-0000-000000000002
